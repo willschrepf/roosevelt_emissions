@@ -1,0 +1,24 @@
+---
+title: "firm-emissions"
+author: "Will Schrepferman"
+date: "6/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(janitor)
+```
+
+## Top-emitting firms
+
+```{r}
+data <- read_csv("firm-emissions.csv") %>%
+  clean_names()
+
+data %>%
+  group_by(client_name) %>%
+  summarise(count = sum(emission_amount_in_tons))
+```
+
